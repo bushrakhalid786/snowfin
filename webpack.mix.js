@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/asset/js/app.js', 'public/js')
+   .sass('resources/asset/sass/app.scss', 'public/css')
+   .copy('resources/asset/sass/font-awesome.css', 'public/css')
+   .copy('resources/asset/img', 'public/images')
+   .copy('node_modules/admin-lte/plugins/font-awesome/fonts' ,'public/fonts');
