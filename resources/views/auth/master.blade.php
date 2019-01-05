@@ -8,21 +8,18 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+
     <link rel="stylesheet" href="{{ asset('/css/app.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.css')}}">
 
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
-    @include('layouts.header')
-    @include('layouts.sidebar')
+    @include('auth.header')
     @yield('content')
-    @include('layouts.rightsidebar')
-    @include('layouts.footer')
 
 </div>
 
 <script src="{{ asset('/js/app.js')}}"></script>
 </body>
 </html>
-
