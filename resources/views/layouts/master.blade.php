@@ -23,6 +23,10 @@
 </div>
 
 <script src="{{ asset('/js/app.js')}}"></script>
+<script src="{{ asset('jquery.min.js')}}"></script>
+<script src="{{ asset('jquery.inputmask.js')}}"></script>
+<script src="{{ asset('/js/jquery.inputmask.date.extensions.js')}}"></script>
+
 </body>
 </html>
 
