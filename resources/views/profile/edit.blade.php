@@ -62,7 +62,8 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Zip/PostalCode">
+                                        {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
+
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -105,7 +106,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Zip/PostalCode">
+                                        {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
                                     </div>
                                     <div class="form-group">
 
