@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('/css/app.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.css')}}">
 
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -23,10 +24,6 @@
 </div>
 
 <script src="{{ asset('/js/app.js')}}"></script>
-<script src="{{ asset('jquery.min.js')}}"></script>
-<script src="{{ asset('jquery.inputmask.js')}}"></script>
-<script src="{{ asset('/js/jquery.inputmask.date.extensions.js')}}"></script>
-
 </body>
 </html>
 

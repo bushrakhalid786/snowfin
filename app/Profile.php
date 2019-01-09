@@ -10,6 +10,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Profile extends Model
 {
+
+    protected $fillable = [
+        'dob',
+        'street',
+        'city',
+        'country',
+        'zip',
+        'privacy',
+        'setup',
+    ];
+
     /**
      * Get the user that owns the profile.
      */

@@ -67,9 +67,19 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Profile $profile)
     {
-        //
+        $success = $profile->update($request->all());
+
+        if($success){
+            return response()->json([
+                'responseText' => 'Updated'
+            ], 200);
+        } else {
+            return response()->json([
+                'responseText' => 'Error'
+            ], 500);
+        }
     }
 
     /**

@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -35,45 +35,60 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            {!! Form::open(['url' => route('profile.update', ['profile' => $profile]), 'method' => 'patch']) !!}
-                                <div class="card-body">
-                                    <div class="form-group">
+                            {!! Form::open([
+                                'route'  => [
+                                    'profile.update',
+                                    'profile'       => $profile,
+                                ],
+                                'method'       => 'PATCH',
+                                'name'         => 'form-update-profile',
+                                'id'           => 'form-update-profile',
+
+                            ]) !!}
+
+                            <div class="card-body">
+                                <div class="form-group">
 
 
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="Date of Birth">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <!-- /.input group -->
-                                    </div>
-                                    <div class="form-group">
-
-                                        <input type="text" class="form-control" placeholder="Street">
-                                    </div>
-                                    <div class="form-group">
-
-                                        <input type="text" class="form-control" placeholder="City">
-                                    </div>
-                                    <div class="form-group">
-
-                                        <input type="text" class="form-control" placeholder="Country">
-                                    </div>
-                                    <div class="form-group">
-
-                                        {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
+                                        {{ Form::text('dob', $profile->dob, ['class' => 'form-control', 'placeholder' => 'Date of Birth', 'data-inputmask' => "'alias': 'dd/mm/yyyy'"]) }}
 
                                     </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Privacy Statement</a></label>
-                                    </div>
+                                    <!-- /.input group -->
                                 </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                  {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
+                                <div class="form-group">
+
+                                    {{ Form::text('street', $profile->street, ['class' => 'form-control', 'placeholder' => 'Street']) }}
                                 </div>
+                                <div class="form-group">
+
+                                    {{ Form::text('city', $profile->city, ['class' => 'form-control', 'placeholder' => 'City']) }}
+                                </div>
+                                <div class="form-group">
+
+                                    {{ Form::text('country', $profile->country, ['class' => 'form-control', 'placeholder' => 'Country']) }}
+                                </div>
+                                <div class="form-group">
+
+                                    {{ Form::number('zip', $profile->zip, ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
+
+                                </div>
+                                <div class="form-check">
+
+                                    {{ Form::checkbox('privacy', 1, old('category_id', $profile->privacy) , ['class' => 'form-check-input']) }}
+                                    {!! Form::label('privacylebel', 'I agree to the Privacy Statement', ['class' => 'form-check-label'])  !!}
+                                    {{ Form::Hidden('setup', 1) }}
+
+
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                {!! Form::button('Update', ['class' => 'btn btn-primary btn-block submit-form', 'type' => 'button', 'data-target' => '#form-update-profile']) !!}
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -86,68 +101,70 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
+
                             {!! Form::open(['url' => route('profile.update', ['profile' => $profile]), 'method' => 'patch', 'files' => true]) !!}
-                                <div class="card-body">
-                                    <div class="form-group">
+                            <div class="card-body">
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Company Name">
-                                    </div>
-                                    <div class="form-group">
+                                    {{ Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Company Name']) }}
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Street">
-                                    </div>
-                                    <div class="form-group">
+                                    {{ Form::text('street', '', ['class' => 'form-control', 'placeholder' => 'Street']) }}
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="City">
-                                    </div>
-                                    <div class="form-group">
+                                    {{ Form::text('city', '', ['class' => 'form-control', 'placeholder' => 'City']) }}
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Country">
-                                    </div>
-                                    <div class="form-group">
+                                    {{ Form::text('country', '', ['class' => 'form-control', 'placeholder' => 'Country']) }}
+                                </div>
+                                <div class="form-group">
 
-                                        {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
-                                    </div>
-                                    <div class="form-group">
+                                    {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
 
-                                        <input type="text" class="form-control" placeholder="Phone">
-                                    </div>
-                                    <div class="form-group">
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Fax">
-                                    </div>
-                                    <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Phone">
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="3" placeholder="Description"></textarea>
-                                    </div>
-                                    <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Fax">
+                                </div>
+                                <div class="form-group">
 
-                                        <input type="text" class="form-control" placeholder="Tag Line">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Company Logo</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" placeholder="Description"></textarea>
+                                </div>
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" placeholder="Tag Line">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Company Logo</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="">Upload</span>
                                         </div>
                                     </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Privacy Statement</a></label>
-                                    </div>
                                 </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Privacy Statement</a></label>
                                 </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -159,3 +176,71 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    $.ajaxSetup({
+        "headers": {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function submitAjaxForm(formIdentifier) {
+        if (formIdentifier === undefined) {
+            console.log("formidentifier not set properly");
+            return false;
+        }
+
+        if ($(formIdentifier).length === 0) {
+            console.log("target form not found for: " + formIdentifier);
+            return false;
+        }
+
+        if ($(formIdentifier).attr("data-confirm") !== undefined) {
+            if (!confirm($(formIdentifier).attr("data-confirm"))) {
+                console.log("user aborted sending the form: " + formIdentifier);
+                return false;
+            }
+        }
+
+        // Fix for unchecked checkbox values not posting in form data:
+        // Add a hidden field for all unchecked checkboxes prior to posting
+        $(formIdentifier).find('input.checkboxfix').remove();
+        $(formIdentifier).find("input:checkbox:not(.ignore):not(:checked)").each(function () {
+            $('<input>').attr({
+                type: 'hidden',
+                name: $(this).attr('name'),
+            }).val(0).addClass('checkboxfix').appendTo($(formIdentifier));
+        });
+
+        var formData = new FormData($(formIdentifier).get(0));
+
+        $.ajax({
+            data: formData,
+            type: "POST",
+            url: $(formIdentifier).attr("action"),
+            DataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+        })
+            .done(function (result) {
+            console.log (result);
+            })
+            .fail(function (data) {
+                console.log (data);
+            });
+    }
+
+    $("#content-wrapper").on("click", ".submit-form", function (event) {
+        console.log('button clicked');
+        let $form = $(this).attr("data-target");
+        submitAjaxForm($form);
+    });
+
+
+
+});
+</script>
+
