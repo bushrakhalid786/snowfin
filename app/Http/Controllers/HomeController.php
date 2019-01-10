@@ -25,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $userId = \Auth::user()->id;
-        if($userId){
+        
+        if ($userId) {
             $userProfile = User::find($userId) ?: null;
         }
         return view('home', compact('userProfile'));
