@@ -102,11 +102,21 @@
                             <!-- /.card-header -->
                             <!-- form start -->
 
-                            {!! Form::open(['url' => route('profile.update', ['profile' => $profile]), 'method' => 'patch', 'files' => true]) !!}
+                            {!! Form::open([
+                                'route'  => [
+                                    'companies.update',
+                                    'companies'       => $profile,
+                                ],
+                                'method'       => 'PATCH',
+                                'name'         => 'form-update-companies',
+                                'id'           => 'form-update-companies',
+                                'files'        => true,
+
+                            ]) !!}
                             <div class="card-body">
                                 <div class="form-group">
 
-                                    {{ Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Company Name']) }}
+                                    {{ Form::text('name', $companies->name, ['class' => 'form-control', 'placeholder' => 'Company Name']) }}
                                 </div>
                                 <div class="form-group">
 

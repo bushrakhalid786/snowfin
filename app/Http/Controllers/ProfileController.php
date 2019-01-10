@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profile;
+use App\Company;
 
 class ProfileController extends Controller
 {
@@ -57,7 +58,8 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        return view('profile.edit', compact('profile'));
+        $companies = $profile->companies->first();
+        return view('profile.edit', compact('profile', 'companies'));
     }
 
     /**
