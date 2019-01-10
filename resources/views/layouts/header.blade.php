@@ -39,7 +39,7 @@
             <!-- Message Start -->
             <div class="media">
               
-               {{ Auth::user()->name }}
+               {{ isset(Auth::user()->name) ? Auth::user()->name : ''  }}
             </div>
             <!-- Message End -->
 
