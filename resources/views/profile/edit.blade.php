@@ -111,6 +111,7 @@
                                 'name'         => 'form-update-companies',
                                 'id'           => 'form-update-companies',
                                 'files'        => true,
+                                'enctype'      => 'multipart/form-data',
 
                             ]) !!}
                             <div class="card-body">
@@ -158,7 +159,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                {!! Form::button('Update', ['class' => 'btn btn-primary btn-block submit-form', 'type' => 'button', 'data-target' => '#form-update-company']) !!}
+                                {!! Form::button('Update', ['class' => 'btn btn-primary btn-block submit-form', 'type' => 'button', 'data-target' => '#form-update-companies']) !!}
                             </div>
                             {!! Form::close() !!}
                         </div>

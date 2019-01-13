@@ -68,9 +68,27 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Company $company)
     {
-        //
+       $success = $company->update($request->all());
+
+
+       
+        if($request->hasFile('logo')){
+           $fileName = pathinfo($request->logo->getClientOriginalName(), PATHINFO_FILENAME);         
+           $fileExtension = $request->file('logo')->getClientOriginalExtension();
+           $fileNameToStore = sprintf('%s%s%s%s', $fileName, time(),'.',$fileExtension);
+        } else {
+            $fileNameToStore = 'noimage.jpg'; 
+        }
+        $path = $request->file('logo')->storeAs('public/logo', $fileNameToStore);   
+        $company->logo = $fileNameToStore;
+           $company->update();
+        
+        
+        
+       
+        
     }
 
     /**
