@@ -105,75 +105,61 @@
                             {!! Form::open([
                                 'route'  => [
                                     'companies.update',
-                                    'companies'       => $profile,
+                                    'companies'       => $companies,
                                 ],
                                 'method'       => 'PATCH',
                                 'name'         => 'form-update-companies',
                                 'id'           => 'form-update-companies',
                                 'files'        => true,
+                                'enctype'      => 'multipart/form-data',
 
                             ]) !!}
                             <div class="card-body">
                                 <div class="form-group">
-
                                     {{ Form::text('name', $companies->name, ['class' => 'form-control', 'placeholder' => 'Company Name']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    {{ Form::text('street', '', ['class' => 'form-control', 'placeholder' => 'Street']) }}
+                                    {{ Form::text('street', $companies->street, ['class' => 'form-control', 'placeholder' => 'Street']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    {{ Form::text('city', '', ['class' => 'form-control', 'placeholder' => 'City']) }}
+                                    {{ Form::text('city', $companies->city, ['class' => 'form-control', 'placeholder' => 'City']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    {{ Form::text('country', '', ['class' => 'form-control', 'placeholder' => 'Country']) }}
+                                    {{ Form::text('country', $companies->country, ['class' => 'form-control', 'placeholder' => 'Country']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    {{ Form::number('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
-
+                                    {{ Form::number('zip', $companies->zip, ['class' => 'form-control', 'placeholder' => 'Zip / Postal Code']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    <input type="text" class="form-control" placeholder="Phone">
+                                    {{ Form::text('phone', $companies->phone, ['class' => 'form-control', 'placeholder' => 'Phone']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    <input type="text" class="form-control" placeholder="Fax">
+                                    {{ Form::text('fax', $companies->fax, ['class' => 'form-control', 'placeholder' => 'Fax']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    <input type="text" class="form-control" placeholder="Email">
+                                    {{ Form::text('email', $companies->email, ['class' => 'form-control', 'placeholder' => 'Email']) }}
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="3" placeholder="Description"></textarea>
+                                    {{ Form::textarea('description', $companies->description, ['class' => 'form-control', 'placeholder' => 'Description']) }}
                                 </div>
                                 <div class="form-group">
-
-                                    <input type="text" class="form-control" placeholder="Tag Line">
+                                    {{ Form::text('tagline', $companies->tagline, ['class' => 'form-control', 'placeholder' => 'Tag Line']) }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Company Logo</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text" id="">Upload</span>
-                                        </div>
-                                    </div>
+                                    {{ Form::file('logo') }}
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Privacy Statement</a></label>
+
+                                    {{ Form::checkbox('privacy', 1, old('category_id', $companies->privacy) , ['class' => 'form-check-input']) }}
+                                    {!! Form::label('privacylebel', 'I agree to the Privacy Statement', ['class' => 'form-check-label'])  !!}
+                                    {{ Form::Hidden('setup', 1) }}
+
+
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                {!! Form::button('Update', ['class' => 'btn btn-primary btn-block submit-form', 'type' => 'button', 'data-target' => '#form-update-companies']) !!}
                             </div>
                             {!! Form::close() !!}
                         </div>
