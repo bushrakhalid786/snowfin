@@ -70,24 +70,31 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-       $success = $company->update($request->all());
-
 
        
+        $company->update($request->all());
         if($request->hasFile('logo')){
            $fileName = pathinfo($request->logo->getClientOriginalName(), PATHINFO_FILENAME);         
            $fileExtension = $request->file('logo')->getClientOriginalExtension();
            $fileNameToStore = sprintf('%s%s%s%s', $fileName, time(),'.',$fileExtension);
+           $path = $request->file('logo')->storeAs('public/logo', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg'; 
         }
-        $path = $request->file('logo')->storeAs('public/logo', $fileNameToStore);   
+               
+        
         $company->logo = $fileNameToStore;
-           $company->update();
-        
-        
-        
-       
+            $recordUpdate = $company->update();
+            if ($recordUpdate){
+                $success = true;
+                $message = 'Record Updated';
+                $code = 200;
+            } else {
+                $success = false;
+                $message = 'Error';
+                $code = 422;
+            }
+            return response()->json(['data' => $company, 'success' => $success, 'message' => $message], $code);
         
     }
 

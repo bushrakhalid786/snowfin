@@ -25,6 +25,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                    <span id="alert-message"></span>
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-6">
@@ -220,13 +221,18 @@ $(document).ready(function(){
             contentType: false,
             cache: false,
             processData: false,
-        })
-            .done(function (result) {
-            console.log (result);
-            })
-            .fail(function (data) {
-                console.log (data);
-            });
+            success : function (data) {
+                console.log('this is response ' + data.message);
+                $('#alert-message').html('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fa fa-check"></i> Alert!</h5>' + data.message + '.</div>');
+            },
+            error : function (data) {
+                console.log('this is response ' + data.message);
+                $('#alert-message').html('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fa fa-times"></i> Alert!</h5> Action Failed! ' + data.message + '.</div>');
+
+            }
+            
+        });
+            
     }
 
     $("#content-wrapper").on("click", ".submit-form", function (event) {
