@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -86,15 +87,13 @@ class CompanyController extends Controller
         $company->logo = $fileNameToStore;
             $recordUpdate = $company->update();
             if ($recordUpdate){
-                $success = true;
+                $status = 'success';
                 $message = 'Record Updated';
-                $code = 200;
             } else {
-                $success = false;
-                $message = 'Error';
-                $code = 422;
+                $status = 'failure';
+                $message = 'Record Update Failed';
             }
-            return response()->json(['data' => $company, 'success' => $success, 'message' => $message], $code);
+        Session::flash($status, $message);
         
     }
 
