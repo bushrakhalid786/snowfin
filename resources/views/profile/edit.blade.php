@@ -11,12 +11,7 @@
                         <h1 class="m-0 text-dark">Setup Profile</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        You are logged in!
+
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -25,6 +20,26 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                    @if (session()->has('success'))
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>
+                            {!! session()->get('success') !!}
+                        </strong>
+                    </div>
+                    @endif
+                    @if (session()->has('failure'))
+                        <div class="alert alert-dismissable alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>
+                                {!! session()->get('failure') !!}
+                            </strong>
+                        </div>
+                    @endif
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-6">
@@ -146,7 +161,7 @@
                                     {{ Form::text('tagline', $companies->tagline, ['class' => 'form-control', 'placeholder' => 'Tag Line']) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::file('logo') }}
+                                    {{ Form::file('logo') }} {!! Form::label('existing_logo', $companies->logo, ['class' => 'form-check-label'])  !!}
                                 </div>
                                 <div class="form-check">
 
@@ -220,13 +235,16 @@ $(document).ready(function(){
             contentType: false,
             cache: false,
             processData: false,
-        })
-            .done(function (result) {
-            console.log (result);
-            })
-            .fail(function (data) {
-                console.log (data);
-            });
+            success : function (data) {
+                console.log('this is response ' + data.message);
+                location.reload();
+            },
+            error : function (data) {
+                console.log('this is response ' + data.message);
+            }
+            
+        });
+            
     }
 
     $("#content-wrapper").on("click", ".submit-form", function (event) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -70,24 +71,29 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-       $success = $company->update($request->all());
-
 
        
+        $company->update($request->all());
         if($request->hasFile('logo')){
            $fileName = pathinfo($request->logo->getClientOriginalName(), PATHINFO_FILENAME);         
            $fileExtension = $request->file('logo')->getClientOriginalExtension();
            $fileNameToStore = sprintf('%s%s%s%s', $fileName, time(),'.',$fileExtension);
+           $path = $request->file('logo')->storeAs('public/logo', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg'; 
         }
-        $path = $request->file('logo')->storeAs('public/logo', $fileNameToStore);   
+               
+        
         $company->logo = $fileNameToStore;
-           $company->update();
-        
-        
-        
-       
+            $recordUpdate = $company->update();
+            if ($recordUpdate){
+                $status = 'success';
+                $message = 'Record Updated';
+            } else {
+                $status = 'failure';
+                $message = 'Record Update Failed';
+            }
+        Session::flash($status, $message);
         
     }
 

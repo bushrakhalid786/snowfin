@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\Company;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -71,17 +72,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        $success = $profile->update($request->all());
+        try {
+            $success = $profile->update($request->all());
 
-        if($success){
-            return response()->json([
-                'responseText' => 'Updated'
-            ], 200);
-        } else {
-            return response()->json([
-                'responseText' => 'Error'
-            ], 500);
+            if($success){
+                Session::flash('success', 'Record Updated');
+            }
+        } catch (\Exception $exception){
+            Session::flash('failure', 'Record Update Failed');
         }
+
     }
 
     /**
