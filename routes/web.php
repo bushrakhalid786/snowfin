@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-Route::resource('profile', 'ProfileController')->middleware('auth');
-Route::resource('companies', 'CompanyController')->middleware('auth');
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    Route::resource('profile', 'ProfileController');
+    Route::resource('companies', 'CompanyController');
+
+});
+
+Route::get('settings', function() {} );
