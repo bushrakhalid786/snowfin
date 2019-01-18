@@ -24,5 +24,3 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('companies', 'CompanyController');
 
 });
-
-Route::get('settings', function() {} );
